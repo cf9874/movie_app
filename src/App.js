@@ -5,22 +5,18 @@ import PropTypes from "prop-types";
 
 class App extends React.Component {
   state = {
-    count: 0,
+    isLoading: true,
   };
-  add = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
-  minus = () => {
-    this.setState({ count: this.state.count - 1 });
-  };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 2000);
+  }
   render() {
-    return (
-      <div>
-        <h1>The number is {this.state.count}</h1>
-        <button onClick={this.add}>add</button>
-        <button onClick={this.minus}>minus</button>
-      </div>
-    );
+    const { isLoading } = this.state;
+    return <div>{isLoading ? "로딩중 . . ." : "we are ready!"}</div>;
+    //ComponentDidMount에서 data fetch, API로 부터 data fetch가 다 되면
+    // we are ready 대신 movie 정보를 "map" 해서 render
   }
 }
 
